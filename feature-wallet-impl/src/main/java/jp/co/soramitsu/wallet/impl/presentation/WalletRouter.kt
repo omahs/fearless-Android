@@ -103,6 +103,8 @@ interface WalletRouter : SecureRouter, WalletRouterApi {
 
     fun openNetworkIssues()
 
+    fun openGetSoraCard()
+
     fun openOptionsAddAccount(payload: AddAccountBottomSheet.Payload)
 
     fun openAlert(payload: AlertViewState)

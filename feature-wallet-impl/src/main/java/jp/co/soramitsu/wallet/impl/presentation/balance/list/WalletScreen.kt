@@ -26,12 +26,15 @@ import jp.co.soramitsu.common.compose.component.emptyClick
 import jp.co.soramitsu.common.compose.theme.FearlessTheme
 import jp.co.soramitsu.common.compose.viewstate.AssetListItemViewState
 import jp.co.soramitsu.runtime.multiNetwork.chain.model.ChainId
+import jp.co.soramitsu.soracard.impl.presentation.SoraCardItem
+import jp.co.soramitsu.soracard.impl.presentation.SoraCardItemViewState
 import jp.co.soramitsu.wallet.impl.presentation.balance.list.model.AssetType
 import jp.co.soramitsu.wallet.impl.presentation.common.AssetsList
 import jp.co.soramitsu.wallet.impl.presentation.common.AssetsListInterface
 
 interface WalletScreenInterface : AssetsListInterface {
     fun onBalanceClicked()
+    fun soraCardClicked()
     fun onNetworkIssuesClicked()
     fun assetTypeChanged(type: AssetType)
 }
@@ -66,7 +69,14 @@ fun WalletScreen(
         } else {
             AssetsList(
                 data = data,
-                callback = callback
+                callback = callback,
+                header = {
+                    SoraCardItem(
+                        state = data.soraCardState,
+                        onClose = { },
+                        onClick = callback::soraCardClicked
+                    )
+                }
             )
         }
     }
@@ -77,6 +87,7 @@ fun WalletScreen(
 private fun PreviewWalletScreen() {
     @OptIn(ExperimentalMaterialApi::class)
     val emptyCallback = object : WalletScreenInterface {
+        override fun soraCardClicked() {}
         override fun onBalanceClicked() {}
         override fun onNetworkIssuesClicked() {}
         override fun assetTypeChanged(type: AssetType) {}
@@ -84,15 +95,37 @@ private fun PreviewWalletScreen() {
         override fun actionItemClicked(actionType: ActionItemType, chainId: ChainId, chainAssetId: String, swipeableState: SwipeableState<SwipeState>) {}
     }
 
+    val assets: List<AssetListItemViewState> = listOf(
+        AssetListItemViewState(
+            assetIconUrl = "",
+            assetChainName = "Chain",
+            assetSymbol = "SMB",
+            displayName = "Sora",
+            assetTokenFiat = null,
+            assetTokenRate = null,
+            assetBalance = null,
+            assetBalanceFiat = null,
+            assetChainUrls = emptyMap(),
+            chainId = "",
+            chainAssetId = "",
+            isSupported = true,
+            isHidden = false,
+            hasAccount = true,
+            priceId = null,
+            hasNetworkIssue = false
+        )
+    )
+
     FearlessTheme {
         Surface(Modifier.background(Color.Black)) {
             Column {
                 WalletScreen(
                     data = WalletState(
                         multiToggleButtonState = MultiToggleButtonState(AssetType.Currencies, listOf(AssetType.Currencies, AssetType.NFTs)),
-                        assets = emptyList(),
+                        assets = assets,
                         balance = AssetBalanceViewState("BALANCE", "ADDRESS", true, ChangeBalanceViewState("+100%", "+50$")),
-                        hasNetworkIssues = true
+                        hasNetworkIssues = true,
+                        soraCardState = SoraCardItemViewState("Get SORA Card", null, true)
                     ),
                     callback = emptyCallback
                 )

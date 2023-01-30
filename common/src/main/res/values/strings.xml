@@ -23,6 +23,7 @@ Terms and Conditions and Privacy Policy</string>
 operations\nwill appear here</string>
     <string name="profile_settings_title">Settings</string>
     <string name="profile_language_title">Language</string>
+    <string name="profile_soracard_title">SORA Card</string>
     <string name="about_version">App version</string>
     <string name="about_contact_us">Contact Email</string>
     <string name="about_title">About</string>
@@ -1021,4 +1022,13 @@ Remember to make a backup of your key and keep it in a safe and private place (e
     <string name="polkaswap_path_unavailable_message">Unfortunately there is no such pair, but you can choose another one</string>
     <string name="polkaswap_maximum_sold">Max Sold</string>
     <string name="polkaswap_insufficient_liqudity">Insufficient liquidity</string>
+
+    <string name="sora_card_title">Top up SORA Card with fiat or crypto and pay online, in-store or withdraw in ATM</string>
+    <string name="sora_card_annual_service_fee">0 € annual service fee</string>
+    <string name="sora_card_description">Get Euro IBAN account and Mastercard Debit Card connected to your SORA Wallet</string>
+    <string name="sora_card_enable_card_title">Enable card</string>
+    <string name="sora_card_free_card_issuance">Free card issuance</string>
+    <string name="sora_card_free_card_issuance_conditions_euro">or 12 € application fee</string>
+    <string name="sora_card_free_card_issuance_conditions_xor">If you hold at least 100 € worth of XOR in your SORA account</string>
+
 </resources>

@@ -5,8 +5,13 @@ fragmentKtx = "1.5.2"
 composeThemeAdapter = "1.2.1"
 material = "1.6.1"
 coroutines = "1.6.4"
+soraUi = "0.0.51"
+soraCard = "0.0.5"
 
 [libraries]
+sora-ui = { module = "jp.co.soramitsu:ui-core", version.ref = "soraUi" }
+sora-card = { module = "jp.co.soramitsu:android-sora-card", version.ref = "soraCard" }
+
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 

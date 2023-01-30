@@ -389,6 +389,11 @@
         android:label="TransactionHistoryFilterFragment" />
 
     <fragment
+        android:id="@+id/getSoraCardFragment"
+        android:name="jp.co.soramitsu.soracard.impl.presentation.get.GetSoraCardFragment"
+        android:label="GetSoraCardFragment" />
+
+    <fragment
         android:id="@+id/exportMnemonicFragment"
         android:name="jp.co.soramitsu.account.impl.presentation.exporting.mnemonic.ExportMnemonicFragment"
         android:label="ExportMnemonicFragment"

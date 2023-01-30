@@ -48,7 +48,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             changePinCodeTv.setOnClickListener { viewModel.changePinCodeClicked() }
             profileCurrency.setOnClickListener { viewModel.currencyClicked() }
             profileExperimentalFeatures.setOnClickListener { viewModel.onExperimentalClicked() }
-
+            profileSoraCard.setOnClickListener { viewModel.onSoraCardClicked() }
             viewModel.hasMissingAccountsFlow.observe {
                 missingAccountsIcon.isVisible = it
             }

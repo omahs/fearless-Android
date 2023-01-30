@@ -116,6 +116,9 @@ class ProfileViewModel @Inject constructor(
         router.openExperimentalFeatures()
     }
 
+    fun onSoraCardClicked() {
+    }
+
     val hasMissingAccountsFlow = walletInteractor.assetsFlow().map {
         it.any { it.hasAccount.not() }
     }.stateIn(this, SharingStarted.Eagerly, false)

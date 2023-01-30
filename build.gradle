@@ -1,3 +1,5 @@
+apply from: './scripts/secrets.gradle'
+
 buildscript {
     ext {
         // App version
@@ -216,6 +218,14 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://nexus.iroha.tech/repository/maven-soramitsu/" }
         mavenCentral()
+
+        maven {
+            setUrl("https://maven.pkg.github.com/paywings/integration")
+            credentials {
+                username = readSecret("PAY_WINGS_USERNAME")
+                password = readSecret("PAY_WINGS_PASSWORD")
+            }
+        }
     }
 }
 
@@ -230,7 +240,6 @@ task clean(type: Delete) {
 dependencies {
 
     ktlint("com.pinterest:ktlint:$ktlintPinterestVersion") {
-//    ktlint("com.pinterest:ktlint:0.46.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
         }

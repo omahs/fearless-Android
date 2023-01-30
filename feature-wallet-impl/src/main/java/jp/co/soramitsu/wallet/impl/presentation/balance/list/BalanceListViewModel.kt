@@ -54,6 +54,7 @@ import jp.co.soramitsu.runtime.multiNetwork.chain.model.Chain
 import jp.co.soramitsu.runtime.multiNetwork.chain.model.ChainId
 import jp.co.soramitsu.runtime.multiNetwork.chain.model.defaultChainSort
 import jp.co.soramitsu.runtime.multiNetwork.chain.model.polkadotChainId
+import jp.co.soramitsu.soracard.impl.presentation.SoraCardItemViewState
 import jp.co.soramitsu.wallet.impl.data.mappers.mapAssetToAssetModel
 import jp.co.soramitsu.wallet.impl.domain.ChainInteractor
 import jp.co.soramitsu.wallet.impl.domain.interfaces.WalletInteractor
@@ -246,6 +247,8 @@ class BalanceListViewModel @Inject constructor(
         assetStates
     }.onStart { emit(buildInitialAssetsList().toMutableList()) }.inBackground().share()
 
+    val soraCardState = MutableStateFlow(SoraCardItemViewState("Get SORA Card", null, true))
+
     // we open screen - no assets in the list
     private suspend fun buildInitialAssetsList(): List<AssetListItemViewState> {
         return withContext(Dispatchers.Default) {
@@ -298,10 +301,12 @@ class BalanceListViewModel @Inject constructor(
     val state = combine(
         assetStates,
         assetTypeSelectorState,
-        balanceFlow
+        balanceFlow,
+        soraCardState
     ) { assetsListItemStates: List<AssetListItemViewState>,
         multiToggleButtonState: MultiToggleButtonState<AssetType>,
-        balanceModel: BalanceModel ->
+        balanceModel: BalanceModel,
+        soraCardState: SoraCardItemViewState ->
 
         val balanceState = AssetBalanceViewState(
             balance = balanceModel.totalBalance?.formatAsCurrency(balanceModel.fiatSymbol).orEmpty(),
@@ -317,7 +322,8 @@ class BalanceListViewModel @Inject constructor(
             assets = assetsListItemStates,
             multiToggleButtonState = multiToggleButtonState,
             balance = balanceState,
-            hasNetworkIssues = hasNetworkIssues
+            hasNetworkIssues = hasNetworkIssues,
+            soraCardState = soraCardState
         )
     }.stateIn(scope = this, started = SharingStarted.Eagerly, initialValue = WalletState.default)
 
@@ -471,6 +477,10 @@ class BalanceListViewModel @Inject constructor(
 
     override fun onNetworkIssuesClicked() {
         router.openNetworkIssues()
+    }
+
+    override fun soraCardClicked() {
+        router.openGetSoraCard()
     }
 
     fun onFiatSelected(item: FiatCurrency) {

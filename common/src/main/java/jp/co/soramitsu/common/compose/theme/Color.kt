@@ -67,6 +67,7 @@ val alertYellow = Color(0xFFEE7700)
 val transparent = Color(0xffffff)
 
 val colorAccentDark = Color(0xFFEE0077)
+val soraRed = Color(0xFFEE2233)
 
 val accentButtonColors = object : ButtonColors {
     @Composable

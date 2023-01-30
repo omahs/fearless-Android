@@ -62,6 +62,7 @@ dependencies {
     implementation project(':feature-account-api')
     implementation project(':feature-account-impl')
     implementation project(':runtime')
+    implementation project(':feature-soracard-impl')
 
     implementation kotlinDep
 
